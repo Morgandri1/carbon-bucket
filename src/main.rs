@@ -10,7 +10,7 @@ use warp::{
 };
 
 // Storage location for files
-const STORAGE_DIR: &str = "store";
+const STORAGE_DIR: &str = "/store";
 
 #[tokio::main]
 async fn main() {
@@ -26,7 +26,7 @@ async fn main() {
     // Routes definition
     let upload_route = warp::path("upload")
         .and(warp::post())
-        .and(warp::body::content_length_limit(10 * 1024 * 1024)) // 10MB limit
+        .and(warp::body::content_length_limit(100 * 1024 * 1024)) // 100MB limit
         .and(warp::body::bytes())
         .and(warp::header("filename"))
         .and(with_storage_path(storage_path.clone()))
